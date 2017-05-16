@@ -1,9 +1,11 @@
-FROM demoregistry.dataman-inc.com/library/centos7-base:20160907193907
+FROM demoregistry.dataman-inc.com/library/centos7-base:latest 
 MAINTAINER pro zpang@dataman-inc.com
 
 ENV ETCD_VERSION=v3.1.7
-ENV ETCD_PKG_NAME=etcd-${ETCD_VERSION}-linux-amd64.tar.gz
+ENV ETCD_PKG_NAME=etcd-${ETCD_VERSION}-linux-amd64
 
-RUN curl -o $ETCD_PKG_NAME https://github.com/coreos/etcd/releases/download/$ETCD_VERSION/$ETCD_PKG_NAME && \
-	    tar xzvf $ETCD_PKG_NAME -d /
+RUN wget https://github.com/coreos/etcd/releases/download/$ETCD_VERSION/$ETCD_PKG_NAME.tar.gz && \
+             tar xzvf $ETCD_PKG_NAME.tar.gz && \
+             mv $ETCD_PKG_NAME/etcd / && mv $ETCD_PKG_NAME/etcdctl / && \
+             rm -Rf $ETCD_PKG_NAME*
 ENTRYPOINT ["/etcd"]
