@@ -5,5 +5,5 @@ ENV ETCD_VERSION=v3.1.7
 ENV ETCD_PKG_NAME=etcd-${ETCD_VERSION}-linux-amd64.tar.gz
 
 RUN curl -o $ETCD_PKG_NAME https://github.com/coreos/etcd/releases/download/$ETCD_VERSION/$ETCD_PKG_NAME && \
-	    tar xzvf $ETCD_PKG_NAME -d / && \
-	    ENTRYPOINT ["/etcd"]
+	    tar xzvf $ETCD_PKG_NAME -d /
+ENTRYPOINT ["/etcd"]
